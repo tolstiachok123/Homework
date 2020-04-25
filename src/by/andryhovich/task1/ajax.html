@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+        <style>
+            body {
+                background: url(http://htmlbook.ru/files/images/blog/animation-bg1.png) repeat-x 0 100% fixed;
+                animation: city 30s linear infinite;
+            }
+            @keyframes city {
+                from { background-position: -1000px 100%, 0 0;}
+                to { background-position: 0 100%, 0 0; }
+            }
+            .button {
+                background-color: #555555;;
+                border: none;
+                border-radius: 12px;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Поиск фильмов по названию</h1>
+        <form action="https://api.themoviedb.org/3/search/multi?language=ru-RU&api_key=71b3b82dc7a715181cdd117a60046196">
+            <input type="text" id="input" name="filmName" autofocus/>
+            <button type="button" class="button" id="find" name ="find" onclick="return functionAJAX(this.form)">Find</button>
+            <input type="reset" class="button" value="Reset">
+        </form>
+        <xmp type="text"></xmp>
+        <script type="text/javascript">
+            function functionAJAX(form){
+                $.ajax({
+                    url: $(form).attr('action'),
+                    data: {query: document.getElementById("input").value},
+                    success: function(data) {
+                        console.log(data);
+                        $("xmp").text(JSON.stringify(data, null, '\t'));
+                    }
+                });
+                return true;
+            };
+        </script>
+    </body>
+</html>
