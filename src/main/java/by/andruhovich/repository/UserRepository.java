@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class UserRepository {
 
-    private final String getUserQuery = "Select * from Users";
+    private final String getUserQuery = "SELECT * FROM users";
 
-    private final String addUserQuery = "INSERT INTO Users (login, password) VALUES (?, ?)";
+    private final String addUserQuery = "INSERT INTO users (login, password) VALUES (?, ?)";
 
     public void addUserToDB(String login, String password) {
         try {
@@ -21,6 +21,7 @@ public class UserRepository {
             preparedStatement.setString(2, password);
             preparedStatement.executeUpdate();
             DBUtil.addConnection(connection);
+            connection.close();
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
@@ -34,6 +35,7 @@ public class UserRepository {
             ResultSet resultSet = statement.executeQuery(getUserQuery);
             users.addAll(createUsersList(resultSet));
             DBUtil.addConnection(connection);
+            connection.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

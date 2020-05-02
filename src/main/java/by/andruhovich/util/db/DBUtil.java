@@ -8,8 +8,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class DBUtil {
 
     private final static String url = "jdbc:mysql://localhost:3306/Users?useUnicode=true&serverTimezone=UTC&useSSL=true&verifyServerCertificate=false";
-    private final static String user = "sergey";
-    private final static String password = "Pravilavoini1";
+    private final static String user = "root";
+    private final static String password = "9109";
 
     private final static ArrayBlockingQueue<Connection> connections = new ArrayBlockingQueue<Connection>(1);
 
